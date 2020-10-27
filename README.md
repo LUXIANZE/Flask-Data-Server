@@ -32,6 +32,5 @@ deactivate
 - In order to start your server locally, you should (assuming venv is not activated, skip first command if venv is activated)
 ```
 . venv/bin/activate
-export FLASK_APP=hello.py
 flask run
 ```
