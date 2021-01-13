@@ -15,5 +15,21 @@ def report():
     if request.method == 'POST':
         payload = request.json
 
-        db.col.insert_one({"mRNNumber":payload['mRNNumber'], "report":payload['report'], "date":payload['date']})
+        print("payload: "+ str(payload))
+        db.reports_collection.insert_one({"mRNNumber":payload['mRNNumber'], "report":payload['report'], "date":payload['date']})
         return "Success"
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    if request.method == 'POST':
+        payload = request.json
+
+        print("payload: " + str(payload))
+        doc = db.patients_collection.find_one({"mRNNumber": payload['mRNNumber']})
+        print("doc: " + str(doc))
+        if doc['ic'] == payload['ic'] :
+            return "Success"
+        else:
+            return 'Patient not found', 404
+
+
